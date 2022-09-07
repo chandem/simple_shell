@@ -1,4 +1,3 @@
-
 .TH man 1 "05 Sep 2022" "0.1" "simple_shell man page"
 
 .SH NAME
@@ -39,4 +38,4 @@ $ ls -l
 Single space required after argument.
 
 .SH AUTHOR
-Chane Eshetu, Rebcca Asaye 
+Chane Eshetu, Rebcca Asaye
