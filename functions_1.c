@@ -1,16 +1,46 @@
 #include "main.h"
-/**
- * _puts - prints a string
- * @str: pointer to the string to print
- * Return: void
-*/
 
-void _puts(char *str)
+/**
+ * find_command - finds command to execute in path routes.
+ *
+ * @command: first position of getline input.
+ *
+ * Return: string of folder for command to be executed.
+ **/
+char *find_command(char *command)
 {
-int i = 0;
-while (str[i])
-{
-	_putchar(str[i]);
-	i++;
-}
+	DIR *folder;
+	struct dirent *entry;
+	char *cmd, comp, **str  = malloc(sizeof(char) * 1024);
+	char **split = malloc(sizeof(char) * 1024);
+	int i;
+
+	while (*environ != NULL)
+	{
+		if (!(_strcmpdir(*environ, "PATH")))
+		{
+			*str = *environ;
+			for (i = 0; i < 9; i++, split++, str++)
+			{
+				*split = strtok(*str, ":='PATH'");
+				folder = opendir(*split);
+				if (folder == NULL)
+				{
+					perror("Unable to read directory");
+				}
+				while ((entry = readdir(folder)))
+				{
+					cmd = entry->d_name;
+					comp = _strcmpdir(cmd, command);
+					if (comp == 0)
+					{
+						return (*split);
+					}
+					if (cmd == NULL)
+					{
+						perror("Error");
+					}}}}
+		environ++;
+	}
+	return ("Error: Not Found");
 }
